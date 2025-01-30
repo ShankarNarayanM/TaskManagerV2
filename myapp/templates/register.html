@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="shadow-lg border border-warning rounded-3 p-3 mx-auto my-5" style="max-width: 23%;min-height:60%">
+        <h1 class="text-center my-4" style="font-family:Verdana;">Sign Up</h1>
+        {% include "includes/errors.html" %}
+            
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <input class="form-control mb-4" name="username" value="{{username}}" type="text" placeholder="Username" />
+                <input class="form-control mb-4" name="email" value="{{email}}" type="text" placeholder="Email" />
+                <input class="form-control mb-4" name="password" type="password" placeholder="Password" />
+                <input class="form-control mb-4" name="confirm_password" type="password" placeholder="Confirm Password" />
+                <div class="d-grid gap-2 col-4 mx-auto">
+                    <button class="btn btn-success" type="submit">Register</button>
+                </div>
+            </form>
+            <div class="my-3">
+                <center>Have an account? 
+                    <a href="{% url 'loginPage' %}" class="text-decoration-none fw-bold">Login</a>
+                </center>
+            </div>
+        </div>
+    </div>
+{% endblock  %}

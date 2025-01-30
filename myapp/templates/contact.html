@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        {% if user.is_authenticated %}
+            {% include "includes/sidePanel.html" %}
+        {% endif %}
+        <main class="col-10 mx-auto my-5" style="height:100vh;">
+            <div class="shadow-lg border border-warning rounded-3 p-3 mx-auto">
+                <h1 class="text-center">Contact Form</h1>
+                <!-- Error message -->
+                {% for field in form %}
+                    <div class="col-12">
+                        {% for error in field.errors %}
+                            <span class="fw-bold text-uppercase">{{field.name}}</span>
+                            <span class="text-danger">{{error}}</span>
+                        {% endfor %}
+                    <div>
+                {% endfor %}
+
+                <!-- Success message -->
+                
+                {% if success_message %}
+                        <div class="alert alert-success" role="alert">
+                            {{success_message}}
+                        </div>
+                {% endif %}
+                
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-6 my-3">
+                            <input class="form-control" name="username" value="{{username}}" type="text" placeholder="Username"/>
+                        </div>
+                        <div class="col-6 my-3">
+                            <input class="form-control" name="email" value="{{email}}" type="email" placeholder="Email"/>
+                        </div>
+                        <div class="col-12 my-3">
+                            <textarea class="form-control" name="message" rows="6" placeholder="Message">{{message}}</textarea>
+                        </div>
+                        <center>
+                            {% comment %} <a href="mailto:xyz@gmail.com"> {% endcomment %}
+                                <button type="submit" class="btn btn-success px-5">Send</button>
+                            {% comment %} </a> {% endcomment %}
+                        </center>
+                    </div>
+                </form>
+                
+            </div>
+        </main>
+    </div>
+{% endblock  %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="shadow-lg border border-warning rounded-3 p-3 mx-auto my-5" style="max-width: 23%;min-height:40%">
+        <h1 class="text-center mb-5" style="font-family:Verdana;">Sign In</h1>
+        {% include "includes/errors.html" %}
+
+        <div class="container">
+            <div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input class="form-control mb-4" name="username" value="{{form.username.value|default:''}}" type="text" placeholder="Username" />
+                    <input class="form-control mb-4" name="password" type="password" placeholder="Password" />
+                    <div class="">
+                        <a href="{% url 'forgotPasswordPage' %}" class="nav-link align-middle">Forgot password</button>
+                        <button class="btn btn-success float-end" type="submit">Sign In</button>
+                    </div>
+                </form>
+            </div>
+            <div class="my-2">
+                <center>Don't have an account? 
+                    <a href="{% url 'registerPage' %}" class="text-decoration-none fw-bold">Register</a>
+                </center>
+            </div>
+        </div>
+    </div>
+{% endblock %}

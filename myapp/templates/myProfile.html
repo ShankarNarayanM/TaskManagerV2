@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        {% include "includes/sidePanel.html" %}
+        
+        <main class="container col-10">
+            <h1>My Profile</h1>
+            <div class="bg-success p-3" style="border-radius:10px;">
+                <div class="my-5 d-flex justify-content-around">
+                    <div style="width:200px;height:200px;border-radius:50%;background-color:#ff6666">
+                        <div style="position:relative;top:25px;left:25px;width:150px;height:150px;border-radius:50%;background-color:#ffcccc">
+                            <p style="position:relative;top:23px;left:55px;color:#fff;font-size:70px">{{user.username.0|title}}</p>
+                        </div>
+                    </div>
+                    <div class="d-grid g-3">
+                        <h2 style="color:white">{{user.username}} </h2>
+                        <h2 style="color:white">{{user.email}} </h2>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

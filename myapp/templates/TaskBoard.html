@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    {% include "includes/sidePanel.html" %}
+    
+    <main class="container col-10">
+        <div class="shadow-lg border border-warning rounded-3 p-3">
+            {% include "includes/errors.html" %}
+            
+            <h2>Task Board</h2>
+            <table class="table table-sm align-middle table-bordered table-primary table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Task</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Start date</th>
+                        <th class="text-center">End date</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Priority</th>
+                        <th class="text-center">Progress</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in tasks %}
+                    <tr>
+                        <td class="text-center">{{t.taskname}}</td>
+                        <td class="text-center">{{t.description}}</td>
+                        <td class="text-center">{{t.start_date|date:'c'}}</td>
+                        <td class="text-center">{{t.end_date|date:'c'}}</td>
+                        <td class="text-center">
+                        <span>{{t.status.status}}</span>
+                        </td>
+                        <td class="text-center">{{t.priority.priority}}</td>
+                        <td class="text-center">
+                        <div class="progress">
+                            <div
+                            class="progress-bar progress-bar-striped progress-bar-animated"
+                            style="width: {{t.progress}}%"
+                            >
+                            {{t.progress}}%
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <a href="{% url "editTaskPage" task_id=t.id %}">
+                                    <button class="btn btn-success btn-sm">Edit</button>
+                                </a>
+                                <button onclick="confirmBeforeDelete(`{% url "deleteTaskPage" task_id=t.id %}`)" class="btn btn-danger btn-sm">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<script>
+    function confirmBeforeDelete(url){
+        var userConfirmed = confirm("Are you sure?")
+        if(userConfirmed){
+            window.location.href = url;
+        }
+    }
+</script>
+    
+{% endblock  %}
